@@ -1,0 +1,60 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>FormMate Test Suite</title>
+	
+	<!--<link href="style.css" rel="stylesheet" type="text/css">-->
+	<style>
+	*{
+		font-family: "Lucida Grande", "Lucida Sans Unicode", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+	h1{
+		position: relative;
+		left: 15px;
+		margin: 25px;
+	}
+	.fmclass{
+		margin: 30px;
+		padding: 25px;
+		font-size: x-large;
+		border: 1px #AAA solid;
+		border-radius: 15px;
+		background: #CCC;
+		-webkit-box-shadow: inset 0 1px 0 #fff;
+		-moz-box-shadow: inset 0 1px 0 #fff;
+		box-shadow: inset 0 1px 0 #fff;
+	}
+	.fmspan{
+		position: relative;
+		width: 340px;
+	}
+	input{
+		position: absolute;
+		height: 30px;
+		width: 300px;
+		left: 200px;
+	}
+	</style>
+</head>
+<body>
+	<h1>FormMate Test Suite</h1>
+	<div class="fmclass" id="password">
+	<span class="fmspan">password: </span><input name="" onkeyup="fm_password(this.value,'password')" type="text">
+	</div>
+	<div class="fmclass" id="email">
+	<span class="fmspan">email: </span><input name="" onkeyup="fm_email(this.value,'email')" type="text">
+	</div>
+	<div class="fmclass" id="number">
+	<span class="fmspan">number: </span><input name="" onkeyup="fm_number(this.value,'30-60','number')" type="text">
+	</div>
+	<div class="fmclass" id="number2">
+	<span class="fmspan">number 2: </span><input name="" onkeyup="fm_number(this.value,'80-x','number2')" type="text">
+	</div>
+	
+<script src="./dgeb.js"></script>
+<script src="./colorize.js"></script>
+<script src="./password/client.js"></script>
+<script src="./email/client.js"></script>
+<script src="./number/client.js"></script>
+</body>
+</html>
