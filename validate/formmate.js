@@ -59,6 +59,50 @@ function fm_colorize(data,output)
         return false;
       }
   }
+function fm_converttxt(text)
+  {
+    var textarray = text.split("");
+    var textoutput = "";
+    for(var i in textarray)
+      {
+        //alert(textarray[i].charCodeAt(0));
+        if((textarray[i].charCodeAt(0)>47)&&(textarray[i].charCodeAt(0)<59))
+          {
+            textoutput = textoutput+textarray[i]; //0-9, :
+          }
+        if((textarray[i].charCodeAt(0)>62)&&(textarray[i].charCodeAt(0)<91))
+          {
+            textoutput = textoutput+textarray[i]; //A-Z
+          }
+        if((textarray[i].charCodeAt(0)>96)&&(textarray[i].charCodeAt(0)<123))
+          {
+            textoutput = textoutput+textarray[i]; //a-z
+          }
+        if((((textarray[i].charCodeAt(0)>34)&&(textarray[i].charCodeAt(0)<47))||(textarray[i].charCodeAt(0)==61)||(textarray[i].charCodeAt(0)==33))&&(textarray[i].charCodeAt(0)!=39))
+          {
+            textoutput = textoutput+textarray[i]; //#$%&()*+,-.=!
+          }
+      }
+    return textoutput;
+  }
+function fm_convertnumber(text)
+  {
+    var textarray = text.split("");
+    var textoutput = "";
+    for(var i in textarray)
+      {
+        //alert(textarray[i].charCodeAt(0));
+        if((textarray[i].charCodeAt(0)>47)&&(textarray[i].charCodeAt(0)<59))
+          {
+            textoutput = textoutput+textarray[i]; //0-9, :
+          }
+        if(textarray[i].charCodeAt(0)==47)
+          {
+            textoutput = textoutput+textarray[i]; //#$%&()*+,-.=!
+          }
+      }
+    return textoutput;
+  }
 function fm_age(dateid,notation,rule,output)
   {
     var date = fm_dgeb(dateid, 'id').value;
@@ -75,24 +119,20 @@ function fm_age(dateid,notation,rule,output)
           day = splited[0];
           month = splited[1];
           year = splited[2];
-          //alert("xyz");
           break;
         case "yyyy.mm.dd":
           splited = date.split(".");
           day = splited[2];
           month = splited[1];
           year = splited[0];
-          //alert("xyz");
           break;
         case "mm/dd/yyyy":
           splited = date.split("/");
           day = splited[1];
           month = splited[0];
           year = splited[2];
-          //alert("xyz");
           break;
         default:
-          //alert("ERROR");
           break;
       }
     
@@ -122,13 +162,17 @@ function fm_age(dateid,notation,rule,output)
             error = 1;
           }
       }
-    
+      
     var now = new Date();
-    var nowts = now.getTime()/31556952000;
+    var nowts = now.getTime()/31556952000;  
     var indate = new Date(year, month, day, 1,0,0);
     var timestamp = indate.getTime()/31556952000;
     
-    
+    if((year<1000)||(year>now.getFullYear()))
+      {
+        error = 1;
+      }
+
     if((isNaN(timestamp))||(error == 1))
       {
         fm_colorize(false,output);
@@ -136,6 +180,7 @@ function fm_age(dateid,notation,rule,output)
       }
     else
       {
+        
         fm_number(nowts-timestamp,rule,output);
         return true;
       }
@@ -155,24 +200,20 @@ function fm_date(dateid,notation,output)
           day = splited[0];
           month = splited[1];
           year = splited[2];
-          //alert("xyz");
           break;
         case "yyyy.mm.dd":
           splited = date.split(".");
           day = splited[2];
           month = splited[1];
           year = splited[0];
-          //alert("xyz");
           break;
         case "mm/dd/yyyy":
           splited = date.split("/");
           day = splited[1];
           month = splited[0];
           year = splited[2];
-          //alert("xyz");
           break;
         default:
-          //alert("ERROR");
           break;
       }
     
@@ -224,13 +265,11 @@ function fm_email(email,output)
     if(reg.test(email) == false)
       {
         fm_colorize(false,output);
-        //fm_dgeb(output, 'id').style.background = 'rgb(255,153,153)';
         return false;
       }
     else
       {
         fm_colorize(true,output);
-        //fm_dgeb(output, 'id').style.background = 'rgb(145,243,63)';
         return true;
       }
   }
@@ -252,13 +291,11 @@ function fm_number(innumber,rule,output)
     if((checkf == 1)&&(checks == 1))
       {
         fm_colorize(true,output);
-        //fm_dgeb(output, 'id').style.background = 'rgb(145,243,63)';
         return false;
       }
     else
       {
         fm_colorize(false,output);
-        //fm_dgeb(output, 'id').style.background = 'rgb(255,153,153)';
         return false;
       }
       
@@ -304,13 +341,39 @@ function fm_repeat(idone,idtwo,output)
   {
     if(fm_dgeb(idone, 'id').value != fm_dgeb(idtwo, 'id').value)
       {
-        fm_dgeb(output, 'id').style.background = 'rgb(255,153,153)';
+        fm_colorize(false,output);
         return false;
       }
     else
       {
-        fm_dgeb(output, 'id').style.background = 'rgb(145,243,63)';
-        //fm_dgeb(output, 'id').style.background = fm_dgeb(idone, 'id').style.background;
+        fm_colorize(true,output);
         return true;
       }
+  }
+function fm_cleartext(text,output)
+  {
+    var textarray = text.split("");
+    var textoutput = "";
+    for(var i in textarray)
+      {
+        //alert(textarray[i].charCodeAt(0));
+        if((textarray[i].charCodeAt(0)>47)&&(textarray[i].charCodeAt(0)<59))
+          {
+            textoutput = textoutput+textarray[i]; //0-9, :
+          }
+        if((textarray[i].charCodeAt(0)>62)&&(textarray[i].charCodeAt(0)<91))
+          {
+            textoutput = textoutput+textarray[i]; //A-Z
+          }
+        if((textarray[i].charCodeAt(0)>96)&&(textarray[i].charCodeAt(0)<123))
+          {
+            textoutput = textoutput+textarray[i]; //a-z
+          }
+        if((((textarray[i].charCodeAt(0)>34)&&(textarray[i].charCodeAt(0)<47))||(textarray[i].charCodeAt(0)==61)||(textarray[i].charCodeAt(0)==33))&&(textarray[i].charCodeAt(0)!=39))
+          {
+            textoutput = textoutput+textarray[i]; //#$%&()*+,-.=!
+          }
+      }
+    //alert(textoutput);
+    fm_dgeb(output, 'id').value = textoutput;
   }
