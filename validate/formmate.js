@@ -89,6 +89,7 @@ function fm_convertnumber(text)
   {
     var textarray = text.split("");
     var textoutput = "";
+    var dots = 0;
     for(var i in textarray)
       {
         //alert(textarray[i].charCodeAt(0));
@@ -96,9 +97,10 @@ function fm_convertnumber(text)
           {
             textoutput = textoutput+textarray[i]; //0-9, :
           }
-        if(textarray[i].charCodeAt(0)==47)
+        if(((textarray[i].charCodeAt(0)==46)||(textarray[i].charCodeAt(0)==44))&&(dots == 0))
           {
-            textoutput = textoutput+textarray[i]; //#$%&()*+,-.=!
+            textoutput = textoutput+'.'; //#$%&()*+,-.=!
+            dots = 1;
           }
       }
     return textoutput;
@@ -275,10 +277,10 @@ function fm_email(email,output)
   }
 function fm_number(innumber,rule,output)
   {
-    var number = parseInt(innumber);
-    var rulenumbers = rule.split("-");
     var checkf = 0;
     var checks = 0;
+    var number = parseInt(innumber);
+    var rulenumbers = rule.split("-");
     
     if((number>=rulenumbers[0])||(rulenumbers[0]=='x'))
       {
@@ -288,17 +290,21 @@ function fm_number(innumber,rule,output)
       {
         checks = 1;
       }
+    if(isNaN(innumber))
+      {
+        checkf = 0;
+      }
+
     if((checkf == 1)&&(checks == 1))
       {
         fm_colorize(true,output);
-        return false;
+        return true;
       }
     else
       {
         fm_colorize(false,output);
         return false;
       }
-      
   }
 function fm_password(password,output)
   {
@@ -352,28 +358,11 @@ function fm_repeat(idone,idtwo,output)
   }
 function fm_cleartext(text,output)
   {
-    var textarray = text.split("");
-    var textoutput = "";
-    for(var i in textarray)
-      {
-        //alert(textarray[i].charCodeAt(0));
-        if((textarray[i].charCodeAt(0)>47)&&(textarray[i].charCodeAt(0)<59))
-          {
-            textoutput = textoutput+textarray[i]; //0-9, :
-          }
-        if((textarray[i].charCodeAt(0)>62)&&(textarray[i].charCodeAt(0)<91))
-          {
-            textoutput = textoutput+textarray[i]; //A-Z
-          }
-        if((textarray[i].charCodeAt(0)>96)&&(textarray[i].charCodeAt(0)<123))
-          {
-            textoutput = textoutput+textarray[i]; //a-z
-          }
-        if((((textarray[i].charCodeAt(0)>34)&&(textarray[i].charCodeAt(0)<47))||(textarray[i].charCodeAt(0)==61)||(textarray[i].charCodeAt(0)==33))&&(textarray[i].charCodeAt(0)!=39))
-          {
-            textoutput = textoutput+textarray[i]; //#$%&()*+,-.=!
-          }
-      }
-    //alert(textoutput);
+    var textoutput = fm_converttxt(text);
+    fm_dgeb(output, 'id').value = textoutput;
+  }
+function fm_clearfloat(text,output)
+  {
+    var textoutput = fm_convertnumber(text);
     fm_dgeb(output, 'id').value = textoutput;
   }
