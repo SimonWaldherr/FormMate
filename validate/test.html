@@ -38,14 +38,14 @@
 	}
 	</style>
 </head>
-<body>
-	<h1>FormMate Test Suite</h1>
+<body onload="">
+	<h1 onclick="fm_AddEvents();">FormMate Test Suite</h1>
 	
 	<div class="fmclass" id="password">
 		<span class="fmspan">password: </span><input id="pw" name="" onkeyup="fm_password(this.value,'password')" type="text">
 	</div>
 	<div class="fmclass" id="email">
-		<span class="fmspan">email: </span><input name="" onkeyup="fm_email(this.value,'email')" type="text">
+		<span class="fmspan fm_email">email: </span><input name="" onkeyup="fm_email(this.value,'email')" type="text">
 	</div>
 	<div class="fmclass" id="number">
 		<span class="fmspan">number: </span><input name="" onkeyup="fm_number(this.value,'30-60','number')" type="text">
@@ -69,7 +69,7 @@
 		<span class="fmspan">clearfloat: </span><input id="ct2" name="" onkeyup="fm_clearfloat(this.value,'ct2');" type="text">
 	</div>
 	
-<script src="./formmate.js"></script>
+<script src="./EventListener/formmate.js"></script>
 
 </body>
 </html>
