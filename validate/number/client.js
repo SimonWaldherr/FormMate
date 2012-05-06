@@ -15,12 +15,14 @@ function fm_number(number,rule,output)
       }
     if((checkf == 1)&&(checks == 1))
       {
-        document.getElementById(output).style.background = 'rgb(145,243,63)';
+        fm_colorize(true,output);
+        //fm_dgeb(output, 'id').style.background = 'rgb(145,243,63)';
         return false;
       }
     else
       {
-        document.getElementById(output).style.background = 'rgb(255,153,153)';
+        fm_colorize(false,output);
+        //fm_dgeb(output, 'id').style.background = 'rgb(255,153,153)';
         return false;
       }
       

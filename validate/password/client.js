@@ -33,22 +33,26 @@ function fm_password(password,output)
           }
       }
     complex = ((uletter*lletter*numbers*special)+Math.round(uletter*1.8+lletter*1.5+numbers+special*2))-6;
+    fm_colorize(complex,output);
+    
     //document.getElementById('pwsec').innerHTML = complex;
+    /*
     if((complex < 115)&&(complex > 1))
       {
         boxcolor = 'rgb(255,'+(153+complex)+','+(153-complex)+')';
-        document.getElementById(output).style.background = boxcolor;
+        fm_dgeb(output, 'id').style.background = boxcolor;
       }
     if((complex > 115)&&(complex < 230))
       {
         complex = complex - 115;
         boxcolor = 'rgb('+(255-complex)+',243,63)';
-        document.getElementById(output).style.background = boxcolor;
+        fm_dgeb(output, 'id').style.background = boxcolor;
       }
     if(complex > 230)
       {
         boxcolor = 'rgb(145,243,63)';
-        document.getElementById(output).style.background = boxcolor;
+        fm_dgeb(output, 'id').style.background = boxcolor;
       }
     return 1;
+    */
   }

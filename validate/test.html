@@ -14,7 +14,7 @@
 		margin: 25px;
 	}
 	.fmclass{
-		margin: 30px;
+		margin: 30px auto 30px auto;
 		padding: 25px;
 		font-size: x-large;
 		border: 1px #AAA solid;
@@ -33,22 +33,33 @@
 		height: 30px;
 		width: 300px;
 		left: 200px;
+		font-size: large;
+		font-family: Courier;
 	}
 	</style>
 </head>
 <body>
 	<h1>FormMate Test Suite</h1>
 	<div class="fmclass" id="password">
-	<span class="fmspan">password: </span><input name="" onkeyup="fm_password(this.value,'password')" type="text">
+		<span class="fmspan">password: </span><input id="pw" name="" onkeyup="fm_password(this.value,'password')" type="text">
 	</div>
 	<div class="fmclass" id="email">
-	<span class="fmspan">email: </span><input name="" onkeyup="fm_email(this.value,'email')" type="text">
+		<span class="fmspan">email: </span><input name="" onkeyup="fm_email(this.value,'email')" type="text">
 	</div>
 	<div class="fmclass" id="number">
-	<span class="fmspan">number: </span><input name="" onkeyup="fm_number(this.value,'30-60','number')" type="text">
+		<span class="fmspan">number: </span><input name="" onkeyup="fm_number(this.value,'30-60','number')" type="text">
 	</div>
 	<div class="fmclass" id="number2">
-	<span class="fmspan">number 2: </span><input name="" onkeyup="fm_number(this.value,'80-x','number2')" type="text">
+		<span class="fmspan">number 2: </span><input name="" onkeyup="fm_number(this.value,'80-x','number2')" type="text">
+	</div>
+	<div class="fmclass" id="repeat">
+		<span class="fmspan">repeat pw: </span><input id="pwrp" name="" onkeyup="fm_repeat('pw','pwrp','repeat')" type="text">
+	</div>
+	<div class="fmclass" id="date">
+		<span class="fmspan">date: </span><input id="datein" name="" onkeyup="fm_date('datein','dd.mm.yyyy','date');" type="text">
+	</div>
+	<div class="fmclass" id="age">
+		<span class="fmspan">date: </span><input id="agein" name="" onkeyup="fm_age('agein','dd.mm.yyyy','18-x','age');" type="text">
 	</div>
 	
 <script src="./dgeb.js"></script>
@@ -56,5 +67,8 @@
 <script src="./password/client.js"></script>
 <script src="./email/client.js"></script>
 <script src="./number/client.js"></script>
+<script src="./repeat/client.js"></script>
+<script src="./date/client.js"></script>
+<script src="./age/client.js"></script>
 </body>
 </html>
