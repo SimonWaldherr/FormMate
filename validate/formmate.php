@@ -23,7 +23,7 @@ function fm_convertnumber($text, $correct=0)
   {
 	if(is_numeric($text))
 	  {
-		return $text;
+		return ($text+1-1);
 	  }
 	elseif($correct)
 	  {
@@ -43,7 +43,7 @@ function fm_convertnumber($text, $correct=0)
 				$dots = 1;
 			  }
 		  }
-		return $textoutput;
+		return ($textoutput+1-1);
 	  }
 	else
 	  {
@@ -87,7 +87,7 @@ function fm_email($text, $correct=0)
 	  }
   }
 
-function fm_hashmix($text, $salt="!entersalthere!1", $rounds=5120)
+function fm_hashmix($text, $salt='!entersalthere!1', $rounds=5120)
   {
 	if($rounds>999999999)
 	  {
@@ -107,6 +107,22 @@ function fm_hashmix($text, $salt="!entersalthere!1", $rounds=5120)
 	$return = crypt($return.hash("SHA256", $text.$return.$salt.crc32($return).md5($return)), '$6$rounds=1000$'.$salt.'$');
 	$return = explode($salt.'$', $return);
 	return $return[1];
+  }
+function fm_crazyhash($text, $salt='!entersalthere!1', $search='crc')
+  {
+    $found = 0;
+    $i = 1;
+    while(!$found)
+      {
+        $text = crypt($text, '$6$rounds=1000$'.$salt.'$');
+        $found = strpos($text, $search);
+        ++$i;
+        if($i>10000)
+          {
+            $found=true;
+          }
+      }
+    return hash("SHA512", $i.$i.$text.$i.$i);
   }
 
 function fm_md5($text)
