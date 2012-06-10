@@ -39,13 +39,13 @@
 	</style>
 </head>
 <body onload="">
-	<h1 onclick="fm_AddEvents();">FormMate Test Suite</h1>
+	<h1 onclick="fm_addfmevents();">FormMate Test Suite</h1>
 	
 	<div class="fmclass" id="password">
 		<span class="fmspan">password: </span><input id="pw" name="" onkeyup="fm_password(this.value,'password')" type="text">
 	</div>
 	<div class="fmclass" id="email">
-		<span class="fmspan fm_email">email: </span><input name="" onkeyup="fm_email(this.value,'email')" type="text">
+		<span id="sema" class="fmspan fm_email">email: </span><input id="iema" name="" type="text">
 	</div>
 	<div class="fmclass" id="number">
 		<span class="fmspan">number: </span><input name="" onkeyup="fm_number(this.value,'30-60','number')" type="text">

@@ -1,48 +1,54 @@
-function fm_AddEvents()
+function fm_addevent( obj, type, fn )
+  {
+    if ( obj.attachEvent )
+      {
+        obj['e'+type+fn] = fn;
+        obj[type+fn] = function(){obj['e'+type+fn]( window.event );}
+        obj.attachEvent( 'on'+type, obj[type+fn] );
+      }
+    else
+      {
+        obj.addEventListener( type, fn, false );
+      }
+  }
+
+function fm_addfmevents()
   {
     var allinputelements = document.getElementsByTagName('input');
     for(var i in allinputelements)
       {
         var classes = allinputelements[i].previousSibling.className;
-        if(allinputelements[i].previousSibling.className.indexOf('fm_')!=-1)
+        if(classes.indexOf('fm_')!=-1)
           {
-            if(allinputelements[i].previousSibling.className.indexOf('fm_email')!=-1)
+            if(classes.indexOf('fm_email')!=-1)
+              {
+                fm_addevent(allinputelements[i], 'click', fm_email(allinputelements[i].id, "abc"));
+              }
+            if(classes.indexOf('fm_date')!=-1)
               {
                 
               }
-            if(allinputelements[i].previousSibling.className.indexOf('fm_email')!=-1)
+            if(classes.indexOf('fm_age')!=-1)
               {
                 
               }
-            if(allinputelements[i].previousSibling.className.indexOf('fm_email')!=-1)
+            if(classes.indexOf('fm_number')!=-1)
               {
                 
               }
-            if(allinputelements[i].previousSibling.className.indexOf('fm_email')!=-1)
+            if(classes.indexOf('fm_password')!=-1)
               {
                 
               }
-            if(allinputelements[i].previousSibling.className.indexOf('fm_email')!=-1)
+            if(classes.indexOf('fm_repeat')!=-1)
               {
                 
               }
-            if(allinputelements[i].previousSibling.className.indexOf('fm_email')!=-1)
+            if(classes.indexOf('fm_text')!=-1)
               {
                 
               }
-            if(allinputelements[i].previousSibling.className.indexOf('fm_email')!=-1)
-              {
-                
-              }
-            if(allinputelements[i].previousSibling.className.indexOf('fm_email')!=-1)
-              {
-                
-              }
-            if(allinputelements[i].previousSibling.className.indexOf('fm_email')!=-1)
-              {
-                
-              }
-            if(allinputelements[i].previousSibling.className.indexOf('fm_email')!=-1)
+            if(classes.indexOf('fm_float')!=-1)
               {
                 
               }
@@ -319,6 +325,8 @@ function fm_date(dateid,notation,output)
   }
 function fm_email(email,output)
   {
+    //alert(email);
+    alert(document.getElementById(email).value);
     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,7})$/;
     if(reg.test(email) == false)
       {
