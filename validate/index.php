@@ -141,6 +141,8 @@ include ('./formmate.php');
     <button type="submit">senden</button>
   </form>
   <hr>
+  <a href="./hashdemo.php">Hash Demo</a>
+  <hr>
   <script>
     function pageload()
       {
