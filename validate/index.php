@@ -3,111 +3,151 @@ include ('./formmate.php');
 ?>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>FormMate</title>
+  <meta charset="utf-8">
+  <title>FormMate</title>
 
-	<script src="./libs/jshash/sha256-min.js"></script>
-	<script src="./formmate.js"></script>
-	<style>
-		*{
-			font-family: "Lucida Grande", "Lucida Sans Unicode", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		}
-		h1{
-			position: relative;
-			left: 15px;
-			margin: 25px;
-		}
-		.fmclass{
-			margin: 30px auto 30px auto;
-			padding: 25px;
-			font-size: x-large;
-			border: 1px #AAA solid;
-			border-radius: 15px;
-			background: #CCC;
-			-webkit-box-shadow: inset 0 1px 0 #fff;
-			-moz-box-shadow: inset 0 1px 0 #fff;
-			box-shadow: inset 0 1px 0 #fff;
-		}
-		.fmspan{
-			position: relative;
-			width: 340px;
-		}
-		input{
-			position: relative;
-			height: 30px;
-			width: 300px;
-			left: 140px;
-			font-size: large;
-			font-family: Courier;
-			margin: 25px;
-		}
-		span{
-			position: relative;
-			display: block;
-			width: 200px;
-		}
-		</style>
+  <script src="./libs/jshash/sha256-min.js"></script>
+  <script src="./formmate.js"></script>
+  <style>
+    *{
+        font-family: "Lucida Grande", "Lucida Sans Unicode", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    h1{
+        position: relative;
+        left: 15px;
+        margin: 25px;
+    }
+    input{
+        height: 30px;
+        width: 300px;
+        font-size: large;
+        font-family: Courier;
+    }
+    span{
+        position: relative;
+        display: block;
+        width: 200px;
+    }
+    tr {
+        height: 35px;
+    }
+    td {
+        height: 30px;
+        width: 300px;
+        font-size: large;
+        font-family: Courier;
+        margin: 15px;
+    }
+    .trbg{
+        background-color: #ccc;
+    }
+    .trhbg{
+        background-color: 
+        #555;
+        color: 
+        #EEE;
+        font-size: larger;
+    }
+  </style>
 </head>
-<body>
-<h1>FormMate</h1>
-<h2>validate and filter examples<h2><br><hr>
-<h3>Clientside (JS)</h3><br>
-
-<i>(v) = validate<br>
-   (f) = filter<br>
-   (g) = generate
-</i><br><br>
-
-<form method="post" action="">
-<span class=""><label for="textfield1">Text (f)</label></span>
-<input name="Text" id="textfield1" type="text" value="<?php echo $_POST['Text'] ?>" onkeyup="fm_cleartext(this.value,'textfield1');"><br>
-
-<span class=""><label for="textfield2">eMail (v)</label></span>
-<input name="eMail" id="textfield2" type="text"value="<?php echo $_POST['eMail'] ?>" onkeyup="fm_email(this.value,'textfield2');"><br>
-
-<span class=""><label for="textfield3">Nummer (v)</label></span>
-<input name="Nummer" id="textfield3" type="text"value="<?php echo $_POST['Nummer'] ?>" onkeyup="fm_clearfloat(this.value,'textfield3');"><br>
-
-<span class=""><label for="textfield7">Date</label></span>
-<input name="Date" id="textfield7" type="text"value="<?php echo $_POST['Date'] ?>" onkeyup=""><br>
-
-<span class=""><label for="textfield4">No HTML</label></span>
-<input name="NoHTML" id="textfield4" type="text"value="<?php echo $_POST['NoHTML'] ?>" onkeyup=""><br>
-
-<span class=""><label for="textfield5">Hash (g)</label></span>
-<input name="Hash" id="textfield5" type="text"value="<?php echo $_POST['Hash'] ?>" onkeyup="javascript:document.getElementById('hashjs').innerHTML = hex_sha256(this.value);"><br>
-
-<span class=""><label for="textfield6">Password (v+)</label></span>
-<input name="Password" id="textfield6" type="password" value="<?php echo $_POST['Password'] ?>" onkeyup="fm_password(this.value,'textfield6');"><br>
-<button type="submit">senden</button>
-</form>
-
-<hr>
-
-<table>
-	<tr><td>SHA256 PHP</td><td><?php echo hash("SHA256", $_POST['Hash']) ?></td></tr>
-	<tr><td>SHA256 JS</td><td id="hashjs"></td></tr>
-</table>
-
-<hr>
-
-<h3>Serverside (PHP)</h3>
-
-<table>
-	<tr><th>Input</th><th>Content</th></tr>
-	<tr><td>Text   </td><td><?php echo fm_converttxt($_POST['Text']) ?></td></tr>
-	<tr><td>eMail  </td><td><?php echo fm_email($_POST['eMail'], 1) ?></td></tr>
-	<tr><td>Nummer </td><td><?php echo fm_convertnumber($_POST['Nummer'], 1) ?></td></tr>
-	<tr><td>No HTML</td><td><?php echo fm_nohtml($_POST['NoHTML']) ?></td></tr>
-	<tr><td>HashMix</td><td><?php echo fm_hashmix($_POST['Hash']) ?></td></tr>
-	<tr><td>Password</td><td><?php echo fm_password($_POST['Password']) ?></td></tr>
-	<tr><td>since 1970</td><td><?php echo fm_since() ?></td></tr>
-	<tr><td>since 1970 (days)</td><td><?php echo fm_since('now', 'days') ?> days</td></tr>
-	<tr><td>since X</td><td><?php echo fm_since('now', 'auto', strtotime($_POST['Date'])) ?></td></tr>
-	<tr><td>since X (days)</td><td><?php echo fm_since('now', 'days', strtotime($_POST['Date'])) ?> days</td></tr>
-</table>
-
-<hr>
-
+<body onload="javascript:pageload();">
+  <h1>FormMate</h1>
+  <h2>validate and filter examples</h2>
+  <br>
+  <hr>
+  <i>
+     (v) = validate<br>
+     (f) = filter<br>
+     (g) = generate
+  </i>
+  <br>
+  <form method="post" action="">
+    <table>
+	    
+      <tr>
+          <th>Input</th>
+          <th>Clientside</th>
+          <th>Serverside</th>
+      </tr>
+      
+      <tr class="trbg">
+          <td>Text (f)</td>
+          <td><input name="Text" id="textfield1" type="text" value="<?php echo $_POST['Text'] ?>" onkeyup="fm_cleartext(this.value,'textfield1');"></td>
+          <td><?php echo fm_converttxt($_POST['Text']) ?></td>
+      </tr>
+      
+      <tr>
+          <td>eMail (v)</td>
+          <td><input name="eMail" id="textfield2" type="text"value="<?php echo $_POST['eMail'] ?>" onkeyup="fm_email(this.value,'textfield2');"></td>
+          <td><?php echo fm_email($_POST['eMail'], 1) ?></td>
+      </tr>
+      
+      <tr class="trbg">
+          <td>Nummer (v)</td>
+          <td><input name="Nummer" id="textfield3" type="text"value="<?php echo $_POST['Nummer'] ?>" onkeyup="fm_clearfloat(this.value,'textfield3');"></td>
+          <td><?php echo fm_convertnumber($_POST['Nummer'], 1) ?></td>
+      </tr>
+      
+      <tr>
+          <td>No HTML</td>
+          <td><input name="NoHTML" id="textfield4" type="text"value="<?php echo htmlentities($_POST['NoHTML'], ENT_QUOTES) ?>" onkeyup=""></td>
+          <td><table><tr><td>htmlentities: </td><td style="width:80%;"><i style="font-size:smaller;"><?php echo htmlentities($_POST['NoHTML'], ENT_QUOTES) ?></i></td></tr><tr><td>strip_tags:  </td><td><?php echo fm_nohtml($_POST['NoHTML']) ?></td></tr></table></td>
+      </tr>
+      
+      <tr class="trbg">
+          <td>Hash (g)</td>
+          <td><input name="Hash" id="textfield5" type="text"value="<?php echo $_POST['Hash'] ?>" onkeyup="javascript:document.getElementById('hashjs').innerHTML = hex_sha256(this.value);"></td>
+          <td><table><tr><td>PHP: </td><td><?php echo hash("SHA256", $_POST['Hash']) ?></td></tr><tr><td>JS:  </td><td id="hashjs"></td></tr></table></td>
+      </tr>
+      
+      <tr>
+          <td>HashMix (g)</td>
+          <td>see above</td>
+          <td><i style="font-size:smaller;"><?php echo fm_hashmix($_POST['Hash']) ?></i></td>
+      </tr>
+      
+      <tr class="trbg">
+          <td>Password (v+)</td>
+          <td><input name="Password" id="textfield6" type="password" value="<?php echo $_POST['Password'] ?>" onkeyup="fm_password(this.value,'textfield6');"></td>
+          <td><?php echo fm_password($_POST['Password']) ?> <i style="font-size:smaller;">//BAD &lt; 200 &brvbar; MIN &gt; 600 &brvbar; OK &gt; 900 &brvbar; GOOD &gt; 2000 &brvbar; PERFECT &gt; 2600</i></td>
+      </tr>
+      
+      <tr>
+          <td>since 1970 (g)</td>
+          <td></td>
+          <td><?php echo fm_since() ?></td>
+      </tr>
+      
+      <tr class="trbg">
+          <td>since 1970 (days)</td>
+          <td></td>
+          <td><?php echo fm_since('now', 'days') ?> days</td>
+      </tr>
+      
+      <tr>
+          <td>since X</td>
+          <td><input name="Date" id="textfield7" type="text"value="<?php echo $_POST['Date'] ?>" onkeyup=""></td>
+          <td><?php echo fm_since('now', 'auto', strtotime($_POST['Date'])) ?></td>
+      </tr>
+      
+      <tr class="trbg">
+          <td>since X (days)</td>
+          <td>see above</td>
+          <td><?php echo fm_since('now', 'days', strtotime($_POST['Date'])) ?> days</td>
+      </tr>
+      
+    </table>
+    <br>
+    <button type="submit">senden</button>
+  </form>
+  <hr>
+  <script>
+    function pageload()
+      {
+        fm_email(document.getElementById('textfield2').value,'textfield2');
+        document.getElementById('hashjs').innerHTML = hex_sha256(document.getElementById('textfield5').value);
+        fm_password(document.getElementById('textfield6').value,'textfield6');
+      }
+  </script>
 </body>
 </html>
