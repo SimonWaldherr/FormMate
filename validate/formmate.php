@@ -130,4 +130,131 @@ function fm_md5($text)
     return md5($text);
   }
 
+function fm_since($date1='now', $output='auto', $date2='0')
+  {
+    if(strlen($output)=='1')
+      {
+        switch($output)
+          {
+            case "s":
+                $output = "sec";
+                break;
+            case "i":
+                $output = "min";
+                break;
+            case "h":
+                $output = "hour";
+                break;
+            case "d":
+                $output = "days";
+                break;
+            case "w":
+                $output = "weeks";
+                break;
+            case "m":
+                $output = "month";
+                break;
+            case "y":
+                $output = "years";
+                break;
+          }
+      }
+    if($date1=='now')
+      {
+        $date1=time();
+      }
+    $dif['sec'] = $date1 - $date2;
+    $dif['min'] = $dif['sec']/60;
+    $dif['hour'] = $dif['min']/60;
+    $dif['days'] = $dif['hour']/24;
+    $dif['weeks'] = $dif['days']/7;
+    $dif['month'] = $dif['weeks']/4.348125;
+    $dif['years'] = $dif['days']/365.2425;
+    if($output == 'auto')
+      {
+        if($dif['years']>0.9)
+          {
+            $returnfloat = round($dif['years'], 1);
+            $returntext = "year";
+          }
+        elseif($dif['month']>0.9)
+          {
+            $returnfloat = round($dif['month'], 1);
+            $returntext = "month";
+          }
+        elseif($dif['weeks']>0.9)
+          {
+            $returnfloat = round($dif['weeks'], 1);
+            $returntext = "week";
+          }
+        elseif($dif['days']>0.9)
+          {
+            $returnfloat = round($dif['days'], 1);
+            $returntext = "day";
+          }
+        elseif($dif['hour']>0.9)
+          {
+            $returnfloat = round($dif['hour'], 1);
+            $returntext = "hour";
+          }
+        elseif($dif['min']>0.9)
+          {
+            $returnfloat = round($dif['min'], 1);
+            $returntext = "minute";
+          }
+        else
+          {
+            $returnfloat = round($dif['sec'], 1);
+            $returntext = "second";
+          }
+        if($returnfloat>1)
+          {
+            $returntext = $returntext."s";
+          }
+        return $returnfloat." ".$returntext;
+      }
+    else
+      {
+        return round($dif[$output], 1);
+      }
+  }
+
+function fm_password($text)
+  {
+    $valunicode = "";
+    $keys = str_split($text);
+    $numbers = 1;
+    $uletter = 1;
+    $lletter = 1;
+    $special = 1;
+    $complex = 0;
+    foreach($keys as $key)
+      {
+        $ascii = ord($key);
+        if(($ascii>0x40)&&($ascii<0x5B))
+          {
+            ++$uletter;
+          }
+        if(($ascii>0x60)&&($ascii<0x7B))
+          {
+            ++$lletter;
+          }
+        if(($ascii>0x2F)&&($ascii<0x3A))
+          {
+            ++$numbers;
+          }
+        if(($ascii>0x20)&&($ascii<0x7F))
+          {
+            ++$special;
+          }
+      }
+    $complex = ((($uletter*$lletter*$numbers*$special)+round($uletter*1.8+$lletter*1.5+$numbers+$special*2))-7);
+    return $complex;
+    //BAD     <  200
+    //MIN     >  600
+    //OK      >  900
+    //GOOD    > 2000
+    //PERFECT > 2600
+  }
+
 ?>
