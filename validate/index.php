@@ -60,11 +60,11 @@ include ('./formmate.php');
      (f) = filter<br>
      (g) = generate
   </i>
-  <br>
+  <br><br>
   <form method="post" action="">
     <table>
 	    
-      <tr>
+      <tr class="trhbg">
           <th>Input</th>
           <th>Clientside</th>
           <th>Serverside</th>
