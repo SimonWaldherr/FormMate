@@ -83,9 +83,9 @@ include ('./formmate.php');
       </tr>
       
       <tr class="trbg">
-          <td>Nummer (v)</td>
-          <td><input name="Nummer" id="textfield3" type="text"value="<?php echo $_POST['Nummer'] ?>" onkeyup="fm_clearfloat(this.value,'textfield3');"></td>
-          <td><?php echo fm_convertnumber($_POST['Nummer'], 1) ?></td>
+          <td>Number (v)</td>
+          <td><input name="Number" id="textfield3" type="text"value="<?php echo $_POST['Number'] ?>" onkeyup="fm_clearfloat(this.value,'textfield3');"></td>
+          <td><?php echo fm_convertnumber($_POST['Number'], 1) ?></td>
       </tr>
       
       <tr>
