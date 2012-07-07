@@ -1,0 +1,187 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>RDP - Reqwest Demo Page</title>
+  
+  <link href="./style/style.css" rel="stylesheet" type="text/css">
+  <meta name="viewport" content="initial-scale=1.3" />
+  <script type="text/javascript" src="./reqwest.js"></script>
+  <script>
+    
+    function getdata()
+      {
+        reqwest(
+          {
+              url: 'data.php?get=parameter'
+            , type: 'html'
+            , method: 'post'
+            , data: { foo: 'bar', int: 100 }
+            , success: function (resp)
+                {
+                  document.getElementById('content1').innerHTML = resp
+                }
+          })
+        }
+      
+      function savedatatoid(id)
+        {
+          reqwest(
+            {
+                url: 'data.php?get=parameter'
+              , type: 'html'
+              , method: 'get'
+              , success: function (resp)
+                  {
+                    document.getElementById(id).innerHTML = resp
+                  }
+            })
+        }
+      
+      function ajaxreqwest(uri, id)
+        {
+          reqwest(
+            {
+                url: uri
+              , type: 'html'
+              , method: 'get'
+              , success: function (resp)
+                  {
+                    document.getElementById(id).innerHTML = resp
+                  }
+            })
+        }
+      
+      function ajaxsend(idfrom, uri, idto)
+        {
+          reqwest(
+            {
+                url: uri
+              , type: 'html'
+              , method: 'post'
+              , data: { data: document.getElementById(idfrom).value }
+              , success: function (resp)
+                  {
+                    document.getElementById(idto).value = resp
+                  }
+            })
+        }
+      
+      function formtransmit(uri, idto)
+        {
+          reqwest(
+            {
+                url: uri
+              , type: 'html'
+              , method: 'post'
+              , data: { username: document.getElementById('username').value
+                      , password: document.getElementById('password').value
+                      , emailadr: document.getElementById('emailadr').value
+                      , birthday: document.getElementById('birthday').value
+                      }
+              , success: function (resp)
+                  {
+                    document.getElementById(idto).innerHTML = resp
+                  }
+            })
+        }
+      
+      function deleteinnerHTML(id)
+        {
+          document.getElementById(id).innerHTML = "<br><br>";
+        }
+      
+  </script>
+</head>
+<body>
+  <div id="info">
+  <h1>Reqwest Demo Page</h1>
+  
+  <p>Reqwest is a AJAX lib in Javascript</p>
+  
+  <h3>Version:</h3>
+  <p>07/2012</p>
+  
+  <h3>Size:</h3>
+  <p>Normal: 11KB<br>
+     Minified: 6KB</p>
+  
+  <h3>you can use it under the terms of:</h3>
+  <p>MIT license</p>
+  
+  <h3>the following Browser are supported:</h3>
+   <p>IE6+<br>
+      Chrome 1+<br>
+      Safari 3+<br>
+      Mobile Safari 3+<br>
+      Firefox 1+<br>
+      Opera</p>
+  
+  <h3>this is a project from:</h3>
+   <p>Original: <a href="https://github.com/ded">Dustin Diaz</a><br>
+      this fork: <a href="https://github.com/SimonWaldherr">Simon Waldherr</a></p>
+  
+  </div>
+  <h2>Example 1:</h2>
+  <a href="javascript://" class="del" onclick="deleteinnerHTML('content1')">x</a>
+  <div id="content1" class="content">
+    
+    here, the content will be inserted.
+    <br><br>
+  </div>
+  <a href="javascript://" class="test" onclick="getdata();"> </a>
+  
+  <h2>Example 2:</h2>
+  <a href="javascript://" class="del" onclick="deleteinnerHTML('content2')">x</a>
+  <div id="content2" class="content">
+    
+    here, the content will be inserted.
+    <br><br>
+  </div>
+  <a href="javascript://" class="test" onclick="savedatatoid('content2');"> </a>
+  
+  <h2>Example 3:</h2>
+  <a href="javascript://" class="del" onclick="deleteinnerHTML('content3')">x</a>
+  <div id="content3" class="content">
+    
+    here, the content will be inserted.
+    <br><br>
+  </div>
+  <a href="javascript://" class="test" onclick="ajaxreqwest('data.php', 'content3');"> </a>
+  
+  <h2>Example 4:</h2>
+  <a href="javascript://" class="del" onclick="deleteinnerHTML('content4')">x</a>
+  <div id="content4" class="content">
+    
+    here, the content will be inserted.
+    <br><br>
+  </div>
+  <a href="javascript://" class="test" onclick="ajaxreqwest('data.php?lorem=ipsum', 'content4');"> </a>
+
+  <h2>Example 5:</h2>
+  <a href="javascript://" class="del" onclick="document.getElementById('content5').value='';">x</a>
+  <textarea cols="50" rows="20" id="content5" class="content" style="resize: none;">
+    
+    here, the content will be inserted.
+    <br><br>
+  </textarea><br>
+  <a href="javascript://" class="test" onclick="ajaxsend('content5', 'data.php', 'content5');"> </a>
+
+  <h2>Example 6:</h2>
+  <div id="forms">
+    
+    username: <input name="username" id="username" type="text">
+    password: <input name="password" id="password" type="text">
+    emailadr: <input name="emailadr" id="emailadr" type="text">
+    birthday: <input name="birthday" id="birthday" type="text">
+    
+  </div>
+  <a href="javascript://" class="del" onclick="deleteinnerHTML('content6')">x</a>
+  <div id="content6" class="content">
+    
+    here, the content will be inserted.
+    <br><br>
+  </div>
+  <a href="javascript://" class="test" onclick="formtransmit('data.php?validate=true', 'content6');"> </a>
+  
+</body>
+</html>

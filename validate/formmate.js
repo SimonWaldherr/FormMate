@@ -342,6 +342,7 @@ function fm_password(password,output)
       }
     complex = ((uletter*lletter*numbers*special)+Math.round(uletter*1.8+lletter*1.5+numbers+special*2))-6;
     fm_colorize(complex,output);
+    return complex;
   }
 function fm_repeat(idone,idtwo,output)
   {

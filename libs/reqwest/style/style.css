@@ -1,0 +1,73 @@
+body{
+  width: 90%;
+  background: #eee;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+h3{
+  font-size: 1em;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Geneva, sans-serif;
+  margin-bottom: -10px;
+}
+
+a.test{
+position: relative;
+left: 10%;
+text-decoration: none;
+color: black;
+
+}
+
+a.test::before {
+content: url(./clouddata.gif);
+}
+
+a:visited{
+  color: blue;
+}
+
+a:hover{
+  text-decoration: none;
+  color: #6ba6ff;
+}
+
+.content{
+  width: 80%;
+  background: #ccc;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Geneva, sans-serif;
+  position: relative;
+  left: 2%;
+  overflow: scroll;
+  max-height: 500px;
+}
+
+.del{
+  display: block;
+  top: 30px;
+  width: 80%;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Geneva, sans-serif;
+  position: relative;
+  left: 4%;
+  z-index: 1;
+  color: red;
+  text-decoration: none;
+  text-align: right;
+  font-size: x-large;
+}
+
+#info{
+  width: 90%;
+  margin: auto;
+  padding: 5px 0px 10px 60px;
+  background: white;
+}
+
+#forms{
+  position: relative;
+  left: 3%;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Geneva, sans-serif;
+}
+
+.info, p {
+padding-left: 15px;
+}
