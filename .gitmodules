@@ -1,0 +1,12 @@
+[submodule "repos/reqwest"]
+	path = repos/reqwest
+	url = https://github.com/SimonWaldherr/reqwest
+[submodule "repos/easySQL"]
+	path = repos/easySQL
+	url = git@github.com:SimonWaldherr/easySQL.git
+[submodule "repos/colorize.js"]
+	path = repos/colorize.js
+	url = git@github.com:SimonWaldherr/colorize.js.git
+[submodule "repos/jsHashes"]
+	path = repos/jsHashes
+	url = git://github.com/h2non/jsHashes.git
