@@ -10,3 +10,6 @@
 [submodule "repos/jsHashes"]
 	path = repos/jsHashes
 	url = git://github.com/h2non/jsHashes.git
+[submodule "repos/daterangepicker"]
+	path = repos/daterangepicker
+	url = git://github.com/dangrossman/bootstrap-daterangepicker.git
