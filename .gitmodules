@@ -13,3 +13,12 @@
 [submodule "repos/daterangepicker"]
 	path = repos/daterangepicker
 	url = git://github.com/dangrossman/bootstrap-daterangepicker.git
+[submodule "repos/timeframe"]
+	path = repos/timeframe
+	url = git://github.com/stephencelis/timeframe.git
+[submodule "repos/textselect"]
+	path = repos/textselect
+	url = git://github.com/lmws/js-selection-range.git
+[submodule "repos/worddistance"]
+	path = repos/worddistance
+	url = git@github.com:SimonWaldherr/js-worddistance.git
